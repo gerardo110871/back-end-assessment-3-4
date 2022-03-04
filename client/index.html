@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Back End Assessment</title>
+  </head>
+  <body class="container">
+
+    <button id="complimentButton">Get a compliment</button><br><br>
+    <button id="fortuneBtn">Get Fortune!</button><br><br>
+
+    <form >
+      <input type="radio" id="radioBtn">
+      <label for="loveFood">Click Here If You Love Food</label>
+    </form><br>
+
+    <form>
+      <label for="fortune">Post New Fortune</label> <br>
+      <input type="text" placeholder="Enter Here" id= "input" name = ''> <br>
+      <input type="submit" id="newFortune" value="Click to Submit">
+    </form><br>
+
+    <form>
+      <input type="checkbox">
+      <label for="back-end">Back-end</label><br>
+      <input type="checkbox">
+      <label for="front-end">Front-end</label><br>
+      <input type = 'submit' id="submit">
+    </form>
+
+
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/server/main.js"></script>
+  </body>
+</html>
