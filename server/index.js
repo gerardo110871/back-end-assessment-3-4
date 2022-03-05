@@ -3,11 +3,12 @@ const cors = require("cors");
 
 const app = express();
 
-
 app.use(cors());
 
 app.use(express.json()); // When we want to be able to accept JSON.
 
+const fortunes = []
+const list = []
 
 app.get("/api/compliment", (req, res) => {
   const compliments = ["Gee, you're a smart cookie!",
@@ -39,16 +40,37 @@ app.get("/api/loveFood", (req, res) => {
   res.status(200).send(alert)
 });
 
-app.post("/api/fortune", (req, res) => {
-  let require = req.body
-  res.status(200).send(require)
-  })
+app.post("/api/add", (req, res) => {
+  console.log(req.body)
+  
+  const {newFortune} = req.body
 
+  fortunes.push(newFortune)
+  res.status(200).send(fortunes)
+})
 
+app.delete("/api/delete/:id", (req, res) => { //delete/:id is the key name, you name it whatever you like
+  console.log(req.params)
 
-app.get("/api/checkbox", (req, res) => {
-    let alert = 'whatever you choose is good'
-    res.status(200).send(alert)
+  if(+req.params.id) { //+req.params.id is saying that if the id is a number then do this:
+    //in this case we are deleting so we are going to splice the array created before named fortunes
+        //req.params.id is the value, the number after is the number of items to delete
+    fortunes.splice(req.params.id, 1)
+    res.status(200).send(fortunes)
+
+  } else {
+    console.log('dont have a number')
+    res.status(400).send('Please Enter a Number')
+  }
+})
+
+app.post("/api/cars", (req, res) => {
+  console.log(req.body)
+
+  const {selection} = req.body
+
+  list.push(selection)
+  res.status(200).send(list)
 })
 
 app.listen(4000, () => console.log("Server running on 4000"));

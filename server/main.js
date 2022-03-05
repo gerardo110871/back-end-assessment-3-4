@@ -1,9 +1,16 @@
-let fortuneBtn = document.getElementById('fortuneBtn');
-let radioBtn = document.getElementById('radioBtn');
-let submitBtn = document.getElementById('submit');
-let newFortune = document.getElementById('newFortune');
-let input = document.getElementById('input');
+let fortuneBtn = document.getElementById('fortuneBtn')
 
+let radioBtn = document.getElementById('radioBtn')
+//here im grabbing the fortune input box and button and assigning them to a value
+const fortSubBtn = document.getElementById('fortSubBtn')
+let fortuneInput = document.getElementById('fortuneInput')
+//here im grabbing the delete box and button and assigning them to a value
+let deleteBtn = document.getElementById('deleteBtn')
+let deleteInput = document.getElementById('deleteInput')
+
+//lets grab the dropdown and the submit button here:
+let dropSubmitBtn = document.getElementById('dropSubmitBtn')
+let dropdown = document.getElementById('cars')
 
 document.getElementById("complimentButton").onclick = function () {
     axios.get("http://localhost:4000/api/compliment/")
@@ -31,29 +38,60 @@ function radBtn() {
     })
 };
 
-function newFor() {
-    
-    const fortuneInput = input.value
+function createFortune() {
+    newFortune = fortuneInput.value
 
-    axios.post("http://localhost:4000/api/fortune")
-    .then (function (res){
-        console.log(fortuneInput)
-        const fortune = fortuneInput
-        return fortune
-    })
+    const body = {
+        newFortune
+    }
+
+    axios.post("http://localhost:4000/api/add", body)
+        .then((res) => {
+            console.log(res.data)
+            let fortune = res.data[res.data.length - 1] //this will grab the last item in the array
+            alert(`You just added ${fortune}`) //%{fortune} sends the last index in the array as an alert
+
+            fortuneInput.value = '' //this will clear out the input box after each submit
+        })
+
+
 };
+
+function deleteFortune() {
+    const newIndex = deleteInput.value //grabbing the input from the delete box
+
+    axios.delete(`http://localhost:4000/api/delete/${newIndex}`)//${newIndex} is the param
+        .then((res) => {
+            alert(`You have deleted a fortune`)
+            console.log(res.data)
+        })
+        .catch((err) => {
+            console.log(err.response.data) //this sends an error message if input isn't a number
+        })
+};
+
+function submitCar() {
+    const selection = dropdown.value
+    console.log(selection)
+
+    const body = {
+        selection
+    }
     
-function checkBox() {
-    axios.get("http://localhost:4000/api/checkbox")
-    .then (function (res) {
-        const check = res.data
-        alert(check)
-    })
+    axios.post(`http://localhost:4000/api/cars`, body)
+        .then((res) => {
+            console.log(res.data)
+            let lastCar = res.data[res.data.length - 1] //this will grab the last item in the array
+            alert(`You just added ${lastCar}`)
+        })
+
+
 };
 
 
 
 fortuneBtn.addEventListener("click", getFortunes);
 radioBtn.addEventListener("click", radBtn);
-submitBtn.addEventListener('click', checkBox)
-newFortune.addEventListener('click', newFor)
+fortSubBtn.addEventListener("click", createFortune)
+deleteBtn.addEventListener('click', deleteFortune)
+dropSubmitBtn.addEventListener('click', submitCar)

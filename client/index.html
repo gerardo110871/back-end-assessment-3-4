@@ -12,21 +12,29 @@
       <input type="radio" id="radioBtn">
       <label for="loveFood">Click Here If You Love Food</label>
     </form><br>
+    <!-- this is how we add a fortune in the front end  -->
+    <input id="fortuneInput" type="text" placeholder="Enter Your Fortune">
+    <button id="fortSubBtn">Submit Fortune</button>
+    <!-- this is our delete input and btn -->
+    <input id="deleteInput" type="text" placeholder="Enter index number">
+    <button id="deleteBtn">Click To Delete</button>
 
-    <form>
-      <label for="fortune">Post New Fortune</label> <br>
-      <input type="text" placeholder="Enter Here" id= "input" name = ''> <br>
-      <input type="submit" id="newFortune" value="Click to Submit">
-    </form><br>
 
-    <form>
-      <input type="checkbox">
-      <label for="back-end">Back-end</label><br>
-      <input type="checkbox">
-      <label for="front-end">Front-end</label><br>
-      <input type = 'submit' id="submit">
-    </form>
+    <br><br>
 
+    <label for="cars">Choose a car:</label><br>
+
+    <select id="cars" name="cars" >
+      <option value="empty"></option>
+      <option value="Audi RS5">Audi RS5</option>
+      <option value="Titan Pro">Titan Pro</option>
+      <option value="Camaro ZL1">Camaro ZL1</option>
+      <option value="Mustang GT500">Mustang GT500</option>
+      <option value="Civic Type R">Civic Type R</option>
+      <option value="Lancer Evolution">Lancer Evolution</option>
+      <option value="Ram TRX">Ram TRX</option>
+    </select>
+      <input id= 'dropSubmitBtn' type="submit" value="Submit">
 
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
